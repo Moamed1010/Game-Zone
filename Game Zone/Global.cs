@@ -1,0 +1,11 @@
+﻿global using Game_Zone.Models;
+global using Microsoft.AspNetCore.Mvc.Rendering;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.AspNetCore.Mvc;
+global using System.ComponentModel.DataAnnotations;
+global using Game_Zone.ViewModel;
+global using Game_Zone.Repository;
+global using Game_Zone.Data;
+global using Game_Zone.Settings;
+global using Game_Zone.Attributes;
+global using System.Collections.Generic;

@@ -1,0 +1,73 @@
+﻿@using Game_Zone.ViewModel
+@model CreateVM
+@{
+	ViewData["Title"] = "Add Game";
+}
+
+
+<h5>
+	<i class="bi bi-plus-circle-dotted"></i>
+	Add a new game
+</h5>
+
+<form method="post" asp-controller="Games" asp-action="Createview" enctype="multipart/form-data">
+    <div class="row">
+      
+        <div class="col-md-6">
+            <div>
+                <label asp-for="Name" class="form-label mt-4"></label>
+                <input type="text" class="form-control" asp-for="Name" placeholder="Name">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label asp-for="Description" class="form-label mt-4"></label>
+                <textarea class="form-control" asp-for="Description" placeholder="Description"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label asp-for="CategoryId" class="form-label mt-4">Categories</label>
+                <select class="form-select" asp-for="CategoryId" asp-items="Model.Categories" 
+                 data-placeholder="Select a Category" data-minimum-result-for-search="Infinity">
+                    <option value=""></option>
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label asp-for="SelectedDevices" class="form-label mt-4">Supported Devices</label>
+                <select class="form-select" asp-for="SelectedDevices" asp-items="Model.Devices"
+                        data-placeholder="Select Devices" data-minimum-result-for-search="Infinity">
+                    <option></option>
+                </select>
+                <span asp-validation-for="SelectedDevices" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label asp-for="Cover" class="form-label mt-4">Add Cover</label>
+                <input type="file" class="form-control" asp-for="Cover"
+                       data-rule-extension="@FileSettings.AllowedExtentions.Replace(".",string.Empty)"
+                       data-msg-extension="Not allowed extension"
+                       data-rule-filesize="@FileSettings.MaxFileSizeInBytes"
+                       data-msg-filesize="File size must be less than @FileSettings.MaxFileSizeInMB MB" />
+                <small class="form-text text-muted">Only @FileSettings.AllowedExtentions files are allowed with max size (@FileSettings.MaxFileSizeInMB)MB.</small>
+                <span asp-validation-for="Cover" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-light text-black mt-4">Save</button>
+        </div>
+
+        
+        <div class="col-md-6 d-flex align-items-center justify-content-center">
+            <img class="cover-preview d-none"  alt="Cover" style="max-width: 100%; max-height: 400px;" />
+        </div>
+    </div>
+</form>
+
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+	<script src="~/js/filesize-validator.js" asp-append-version="true"></script>
+	<script src="~/js/game-form.js" asp-append-version="true" ></script>
+} 
